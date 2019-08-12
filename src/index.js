@@ -56,7 +56,8 @@ function createRect() {
         rotateEnabled: false,
         anchorStroke: "#fc766a",
         borderStroke: "#fc766a",
-        anchorCornerRadius: 50
+        anchorCornerRadius: 50,
+        keepRatio: false
     });
     layer.add(rect);
     layer.add(tr);
