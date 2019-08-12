@@ -1,6 +1,6 @@
 import "./styles.css";
 
-let width = window.innerWidth;
+let width = window.innerWidth - 300;
 let height = window.innerHeight;
 
 let stage = new Konva.Stage({
@@ -12,7 +12,7 @@ let stage = new Konva.Stage({
 let layer = new Konva.Layer();
 stage.add(layer);
 
-let ifDragRect = false;
+let ifDragorTransformRect = false;
 let con = stage.container();
 let x1, x2, y1, y2;
 con.addEventListener("mousedown", function(e) {
@@ -20,7 +20,7 @@ con.addEventListener("mousedown", function(e) {
     stage.setPointersPositions(e);
     x1 = stage.getPointerPosition().x;
     y1 = stage.getPointerPosition().y;
-    if (ifDragRect) {
+    if (!ifDragorTransformRect) {
         con.style.cursor = "crosshair";
     }
 });
@@ -32,11 +32,11 @@ con.addEventListener("mouseup", function(e) {
 
     con.style.cursor = "default";
 
-    if (!ifDragRect) {
+    if (!ifDragorTransformRect) {
         createRect();
     }
 
-    ifDragRect = false;
+    ifDragorTransformRect = false;
 });
 
 function createRect() {
@@ -49,14 +49,16 @@ function createRect() {
         draggable: true
     });
     rect.on("transformstart", function() {
-        ifDragRect = true;
+        ifDragorTransformRect = true;
     });
 
     let tr = new Konva.Transformer({
         rotateEnabled: false,
         anchorStroke: "#fc766a",
         borderStroke: "#fc766a",
+        anchorFill: "#fc766a",
         anchorCornerRadius: 50,
+        anchorStrokeWidth: 5,
         keepRatio: false
     });
     layer.add(rect);
@@ -75,7 +77,7 @@ layer.on("mouseout", function() {
     con.style.cursor = "default";
 });
 layer.on("dragstart", function() {
-    ifDragRect = true;
+    ifDragorTransformRect = true;
     // updateText();
 });
 //================================================

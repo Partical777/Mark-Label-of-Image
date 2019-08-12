@@ -6,3 +6,21 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.konvajs-content {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 5px solid red;
+    margin: 0 auto;
+}
+
+.btn {
+    float: right;
+    cursor: pointer;
+    background-color: #fc766a;
+    font-size: 1.5em;
+    height: 50px;
+    width: 125px;
+    border-radius: 25px;
+    margin: 10px;
+    z-index: 1000;
+}
