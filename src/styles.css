@@ -7,6 +7,11 @@ body {
     background-repeat: no-repeat;
 }
 
+#container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
 .konvajs-content {
     background-color: rgba(0, 0, 0, 0.1);
     border: 5px solid red;

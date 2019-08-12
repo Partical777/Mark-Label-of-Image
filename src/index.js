@@ -1,6 +1,6 @@
 import "./styles.css";
 
-let width = window.innerWidth - 300;
+let width = window.innerWidth - 330;
 let height = window.innerHeight;
 
 let stage = new Konva.Stage({
@@ -20,9 +20,6 @@ con.addEventListener("mousedown", function(e) {
     stage.setPointersPositions(e);
     x1 = stage.getPointerPosition().x;
     y1 = stage.getPointerPosition().y;
-    if (!ifDragorTransformRect) {
-        con.style.cursor = "crosshair";
-    }
 });
 con.addEventListener("mouseup", function(e) {
     e.preventDefault();
@@ -37,6 +34,10 @@ con.addEventListener("mouseup", function(e) {
     }
 
     ifDragorTransformRect = false;
+});
+
+con.addEventListener("mouseover", function() {
+    con.style.cursor = "crosshair";
 });
 
 function createRect() {
