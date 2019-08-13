@@ -131,12 +131,30 @@ let makeTextFile = function(text) {
 };
 
 document.getElementById("output").addEventListener("click", function() {
-    console.log(layer.find(".rect")[0].attrs.width);
-    console.log(layer.find(".rect")[0].width());
+    console.log(layer.find(".rect"));
+    console.log(layer.find(".rect").length);
 
     let link = document.createElement("a");
-    link.setAttribute("download", "output.xml");
-    link.href = makeTextFile(layer.find(".rect")[0].width());
+    link.setAttribute("download", "output.txt");
+
+    let OutputString = "";
+
+    layer.find(".rect").forEach(function(el) {
+        OutputString =
+            OutputString +
+            "1" +
+            " " +
+            el.attrs.x +
+            " " +
+            el.attrs.y +
+            " " +
+            el.width() +
+            " " +
+            el.height() +
+            "\r\n";
+    });
+
+    link.href = makeTextFile(OutputString);
     document.body.appendChild(link);
 
     // wait for the link to be added to the document
