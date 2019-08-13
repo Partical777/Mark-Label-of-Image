@@ -12,7 +12,7 @@ let stage = new Konva.Stage({
 let layer = new Konva.Layer();
 stage.add(layer);
 
-let ifDragorTransformRect = false;
+let ableCreateBlock = false;
 let con = stage.container();
 let x1, x2, y1, y2;
 con.addEventListener("mousedown", function(e) {
@@ -29,15 +29,11 @@ con.addEventListener("mouseup", function(e) {
 
     con.style.cursor = "default";
 
-    if (!ifDragorTransformRect) {
+    if (ableCreateBlock) {
         createRect();
     }
 
-    ifDragorTransformRect = false;
-});
-
-con.addEventListener("mouseover", function() {
-    con.style.cursor = "crosshair";
+    ableCreateBlock = false;
 });
 
 function createRect() {
@@ -48,9 +44,6 @@ function createRect() {
         height: y2 - y1,
         name: "rect",
         draggable: true
-    });
-    rect.on("transformstart", function() {
-        ifDragorTransformRect = true;
     });
 
     let tr = new Konva.Transformer({
@@ -76,11 +69,7 @@ layer.on("mouseover", function() {
     con.style.cursor = "move";
 });
 layer.on("mouseout", function() {
-    con.style.cursor = "crosshair";
-});
-layer.on("dragstart", function() {
-    ifDragorTransformRect = true;
-    // updateText();
+    con.style.cursor = "default";
 });
 //================================================
 
@@ -140,13 +129,16 @@ document.getElementById("output").addEventListener("click", function() {
     let OutputString = "";
 
     layer.find(".rect").forEach(function(el) {
+        let centerX = (el.attrs.x + el.width()) / 2;
+        let centerY = (el.attrs.y + el.height()) / 2;
+
         OutputString =
             OutputString +
             "1" +
             " " +
-            el.attrs.x +
+            centerX + //el.attrs.x +
             " " +
-            el.attrs.y +
+            centerY + //el.attrs.y +
             " " +
             el.width() +
             " " +
@@ -163,4 +155,9 @@ document.getElementById("output").addEventListener("click", function() {
         link.dispatchEvent(event);
         document.body.removeChild(link);
     });
+});
+
+document.getElementById("addBlock").addEventListener("click", function() {
+    ableCreateBlock = true;
+    con.style.cursor = "crosshair";
 });
