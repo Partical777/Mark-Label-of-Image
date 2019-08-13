@@ -2,9 +2,6 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url("https://1.bp.blogspot.com/-kLHuAiXvfHM/XVEWJToeMBI/AAAAAAAAn4g/gvu7v-Ttp4sCZgVTWi-oCF3CtG-bCL4XQCLcBGAs/s1600/67805298_465414867369062_1122605825840381952_n.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 #container {
@@ -16,6 +13,9 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
     border: 5px solid red;
     margin: 0 auto;
+    background-image: url("https://1.bp.blogspot.com/-kLHuAiXvfHM/XVEWJToeMBI/AAAAAAAAn4g/gvu7v-Ttp4sCZgVTWi-oCF3CtG-bCL4XQCLcBGAs/s1600/67805298_465414867369062_1122605825840381952_n.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .btn {

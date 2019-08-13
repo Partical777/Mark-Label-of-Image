@@ -62,12 +62,13 @@ function createRect() {
         anchorStrokeWidth: 5,
         keepRatio: false
     });
-    layer.add(rect);
     layer.add(tr);
+    layer.add(rect);
+
     tr.attachTo(rect);
 
     layer.draw();
-    console.log(layer);
+    // console.log(layer);
 }
 
 //if drag exist rect, then don't create a new rect
@@ -75,7 +76,7 @@ layer.on("mouseover", function() {
     con.style.cursor = "move";
 });
 layer.on("mouseout", function() {
-    con.style.cursor = "default";
+    con.style.cursor = "crosshair";
 });
 layer.on("dragstart", function() {
     ifDragorTransformRect = true;
@@ -113,3 +114,35 @@ layer.on("dragstart", function() {
 //     text.text(lines.join("\n"));
 //     layer.batchDraw();
 // }
+
+let textFile = null;
+let makeTextFile = function(text) {
+    let data = new Blob([text], { type: "text/plain" });
+
+    // If we are replacing a previously generated file we need to
+    // manually revoke the object URL to avoid memory leaks.
+    if (textFile !== null) {
+        window.URL.revokeObjectURL(textFile);
+    }
+
+    textFile = window.URL.createObjectURL(data);
+
+    return textFile;
+};
+
+document.getElementById("output").addEventListener("click", function() {
+    console.log(layer.find(".rect")[0].attrs.width);
+    console.log(layer.find(".rect")[0].width());
+
+    let link = document.createElement("a");
+    link.setAttribute("download", "output.xml");
+    link.href = makeTextFile(layer.find(".rect")[0].width());
+    document.body.appendChild(link);
+
+    // wait for the link to be added to the document
+    window.requestAnimationFrame(function() {
+        let event = new MouseEvent("click");
+        link.dispatchEvent(event);
+        document.body.removeChild(link);
+    });
+});
