@@ -16,6 +16,8 @@ para.onload = function() {
     imageHeight = this.height;
     // alert(this.width + "x" + this.height);
 
+    document.getElementById("imgBackground").style.maxWidth = "1600px";
+
     document.getElementById("imgBackground").appendChild(para);
 
     let width = imageWidth;
