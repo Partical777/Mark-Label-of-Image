@@ -1,24 +1,35 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #container {
+    /* max-width: 1600px; */
+}
+
+#imgBackground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 150px;
     max-width: 1600px;
-    margin: 0 auto;
 }
 
 .konvajs-content {
     background-color: rgba(0, 0, 0, 0.1);
     border: 5px solid red;
     margin: 0 auto;
-    background-image: url("https://1.bp.blogspot.com/-kLHuAiXvfHM/XVEWJToeMBI/AAAAAAAAn4g/gvu7v-Ttp4sCZgVTWi-oCF3CtG-bCL4XQCLcBGAs/s1600/67805298_465414867369062_1122605825840381952_n.jpg");
+    /* background-image: url("https://1.bp.blogspot.com/-kLHuAiXvfHM/XVEWJToeMBI/AAAAAAAAn4g/gvu7v-Ttp4sCZgVTWi-oCF3CtG-bCL4XQCLcBGAs/s1600/67805298_465414867369062_1122605825840381952_n.jpg");
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain; */
 }
 
 .btn {
+    position: fixed;
     cursor: pointer;
     background-color: #fc766a;
     font-size: 1.5em;
@@ -30,5 +41,5 @@ body {
 }
 
 #output {
-    float: right;
+    right: 0;
 }

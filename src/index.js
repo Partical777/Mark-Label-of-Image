@@ -1,163 +1,199 @@
 import "./styles.css";
 
-let width = window.innerWidth - 330;
-let height = window.innerHeight;
+let imageWidth = 0;
+let imageHeight = 0;
+let imageRoute = "\\image_0072.jpg";
+let species = "Hand";
 
-let stage = new Konva.Stage({
-    container: "container",
-    width: width,
-    height: height
-});
+let para = document.createElement("img");
 
-let layer = new Konva.Layer();
-stage.add(layer);
+para.src =
+    "https://1.bp.blogspot.com/-kLHuAiXvfHM/XVEWJToeMBI/AAAAAAAAn4g/gvu7v-Ttp4sCZgVTWi-oCF3CtG-bCL4XQCLcBGAs/s1600/67805298_465414867369062_1122605825840381952_n.jpg";
 
-let ableCreateBlock = false;
-let con = stage.container();
-let x1, x2, y1, y2;
-con.addEventListener("mousedown", function(e) {
-    e.preventDefault();
-    stage.setPointersPositions(e);
-    x1 = stage.getPointerPosition().x;
-    y1 = stage.getPointerPosition().y;
-});
-con.addEventListener("mouseup", function(e) {
-    e.preventDefault();
-    stage.setPointersPositions(e);
-    x2 = stage.getPointerPosition().x;
-    y2 = stage.getPointerPosition().y;
+para.onload = function() {
+    //after loading image
+    imageWidth = this.width;
+    imageHeight = this.height;
+    // alert(this.width + "x" + this.height);
 
-    con.style.cursor = "default";
+    document.getElementById("imgBackground").appendChild(para);
 
-    if (ableCreateBlock) {
-        createRect();
-    }
+    let width = imageWidth;
+    let height = imageHeight;
 
-    ableCreateBlock = false;
-});
-
-function createRect() {
-    let rect = new Konva.Rect({
-        x: x1,
-        y: y1,
-        width: x2 - x1,
-        height: y2 - y1,
-        name: "rect",
-        draggable: true
+    let stage = new Konva.Stage({
+        container: "container",
+        width: width,
+        height: height
     });
 
-    let tr = new Konva.Transformer({
-        rotateEnabled: false,
-        anchorStroke: "#fc766a",
-        borderStroke: "#fc766a",
-        anchorFill: "#fc766a",
-        anchorCornerRadius: 50,
-        anchorStrokeWidth: 5,
-        keepRatio: false
+    let layer = new Konva.Layer();
+    stage.add(layer);
+
+    let ableCreateBlock = false;
+    let con = stage.container();
+    let x1, x2, y1, y2;
+    con.addEventListener("mousedown", function(e) {
+        e.preventDefault();
+        stage.setPointersPositions(e);
+        x1 = stage.getPointerPosition().x;
+        y1 = stage.getPointerPosition().y;
     });
-    layer.add(tr);
-    layer.add(rect);
+    con.addEventListener("mouseup", function(e) {
+        e.preventDefault();
+        stage.setPointersPositions(e);
+        x2 = stage.getPointerPosition().x;
+        y2 = stage.getPointerPosition().y;
 
-    tr.attachTo(rect);
+        con.style.cursor = "default";
 
-    layer.draw();
-    // console.log(layer);
-}
+        if (ableCreateBlock) {
+            createRect();
+        }
 
-//if drag exist rect, then don't create a new rect
-layer.on("mouseover", function() {
-    con.style.cursor = "move";
-});
-layer.on("mouseout", function() {
-    con.style.cursor = "default";
-});
-//================================================
+        ableCreateBlock = false;
+    });
 
-// function updateText() {
-//     let xmax = Math.round(rect.x() + rect.width() * rect.scaleX());
-//     let ymax = Math.round(rect.y() + rect.height() * rect.scaleY());
-//     let x_center = Math.round(rect.x() + rect.width() / 2);
-//     let y_center = Math.round(rect.y() + rect.width() / 2);
-//     let lines = [
-//         "x: " + rect.x(),
-//         "y: " + rect.y(),
-//         "",
-//         "xml",
-//         "xmin: " + rect.x(),
-//         "ymin: " + rect.y(),
-//         "xmax: : " + xmax,
-//         "ymax: " + ymax,
-//         "",
-//         "txt",
-//         "x_center: " + x_center,
-//         "y_center: " + y_center,
-//         "width: " + rect.width(),
-//         "height: " + rect.height(),
-//         "",
-//         "rotation: " + rect.rotation(),
-//         "width: " + rect.width(),
-//         "height: " + rect.height(),
-//         "scaleX: " + rect.scaleX(),
-//         "scaleY: " + rect.scaleY()
-//     ];
-//     text.text(lines.join("\n"));
-//     layer.batchDraw();
-// }
+    function createRect() {
+        let rect = new Konva.Rect({
+            x: x1,
+            y: y1,
+            width: x2 - x1,
+            height: y2 - y1,
+            name: "rect",
+            draggable: true
+        });
 
-let textFile = null;
-let makeTextFile = function(text) {
-    let data = new Blob([text], { type: "text/plain" });
+        let tr = new Konva.Transformer({
+            rotateEnabled: false,
+            anchorStroke: "#fc766a",
+            borderStroke: "#fc766a",
+            anchorFill: "#fc766a",
+            anchorCornerRadius: 50,
+            anchorStrokeWidth: 2,
+            keepRatio: false
+        });
+        layer.add(tr);
+        layer.add(rect);
 
-    // If we are replacing a previously generated file we need to
-    // manually revoke the object URL to avoid memory leaks.
-    if (textFile !== null) {
-        window.URL.revokeObjectURL(textFile);
+        tr.attachTo(rect);
+
+        layer.draw();
+        // console.log(layer);
     }
 
-    textFile = window.URL.createObjectURL(data);
+    //if drag exist rect, then don't create a new rect
+    layer.on("mouseover", function() {
+        con.style.cursor = "move";
+    });
+    layer.on("mouseout", function() {
+        con.style.cursor = "default";
+    });
+    //================================================
 
-    return textFile;
+    // function updateText() {
+    //     let xmax = Math.round(rect.x() + rect.width() * rect.scaleX());
+    //     let ymax = Math.round(rect.y() + rect.height() * rect.scaleY());
+    //     let x_center = Math.round(rect.x() + rect.width() / 2);
+    //     let y_center = Math.round(rect.y() + rect.width() / 2);
+    //     let lines = [
+    //         "x: " + rect.x(),
+    //         "y: " + rect.y(),
+    //         "",
+    //         "xml",
+    //         "xmin: " + rect.x(),
+    //         "ymin: " + rect.y(),
+    //         "xmax: : " + xmax,
+    //         "ymax: " + ymax,
+    //         "",
+    //         "txt",
+    //         "x_center: " + x_center,
+    //         "y_center: " + y_center,
+    //         "width: " + rect.width(),
+    //         "height: " + rect.height(),
+    //         "",
+    //         "rotation: " + rect.rotation(),
+    //         "width: " + rect.width(),
+    //         "height: " + rect.height(),
+    //         "scaleX: " + rect.scaleX(),
+    //         "scaleY: " + rect.scaleY()
+    //     ];
+    //     text.text(lines.join("\n"));
+    //     layer.batchDraw();
+    // }
+
+    let textFile = null;
+    let makeTextFile = function(text) {
+        let data = new Blob([text], { type: "text/plain" });
+
+        // If we are replacing a previously generated file we need to
+        // manually revoke the object URL to avoid memory leaks.
+        if (textFile !== null) {
+            window.URL.revokeObjectURL(textFile);
+        }
+
+        textFile = window.URL.createObjectURL(data);
+
+        return textFile;
+    };
+
+    document.getElementById("output").addEventListener("click", function() {
+        console.log(layer.find(".rect"));
+        console.log(layer.find(".rect").length);
+
+        let link = document.createElement("a");
+        link.setAttribute("download", "output.txt");
+
+        let OutputString = "";
+
+        layer.find(".rect").forEach(function(el) {
+            let centerX = (el.attrs.x + el.width()) / 2;
+            let centerY = (el.attrs.y + el.height()) / 2;
+            let xmin = el.attrs.x;
+            let ymin = el.attrs.y;
+            let xmax = el.attrs.x + el.width();
+            let ymax = el.attrs.y + el.height();
+
+            OutputString +=
+                imageRoute +
+                " " +
+                imageWidth +
+                " " +
+                imageHeight +
+                " " +
+                species +
+                " " +
+                centerX + //el.attrs.x +
+                " " +
+                centerY + //el.attrs.y +
+                " " +
+                el.width() +
+                " " +
+                el.height() +
+                " " +
+                xmin +
+                " " +
+                ymin +
+                " " +
+                xmax +
+                " " +
+                ymax +
+                "\r\n";
+        });
+
+        link.href = makeTextFile(OutputString);
+        document.body.appendChild(link);
+
+        // wait for the link to be added to the document
+        window.requestAnimationFrame(function() {
+            let event = new MouseEvent("click");
+            link.dispatchEvent(event);
+            document.body.removeChild(link);
+        });
+    });
+
+    document.getElementById("addBlock").addEventListener("click", function() {
+        ableCreateBlock = true;
+        con.style.cursor = "crosshair";
+    });
 };
-
-document.getElementById("output").addEventListener("click", function() {
-    console.log(layer.find(".rect"));
-    console.log(layer.find(".rect").length);
-
-    let link = document.createElement("a");
-    link.setAttribute("download", "output.txt");
-
-    let OutputString = "";
-
-    layer.find(".rect").forEach(function(el) {
-        let centerX = (el.attrs.x + el.width()) / 2;
-        let centerY = (el.attrs.y + el.height()) / 2;
-
-        OutputString =
-            OutputString +
-            "1" +
-            " " +
-            centerX + //el.attrs.x +
-            " " +
-            centerY + //el.attrs.y +
-            " " +
-            el.width() +
-            " " +
-            el.height() +
-            "\r\n";
-    });
-
-    link.href = makeTextFile(OutputString);
-    document.body.appendChild(link);
-
-    // wait for the link to be added to the document
-    window.requestAnimationFrame(function() {
-        let event = new MouseEvent("click");
-        link.dispatchEvent(event);
-        document.body.removeChild(link);
-    });
-});
-
-document.getElementById("addBlock").addEventListener("click", function() {
-    ableCreateBlock = true;
-    con.style.cursor = "crosshair";
-});
